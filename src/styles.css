@@ -1,0 +1,23 @@
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.table-container {
+  max-height: 55vh;
+  overflow-y: scroll;
+}
+
+.table-header {
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.table-items {
+  max-height: 20vh;
+  overflow-y: scroll;
+}

@@ -1,0 +1,43 @@
+<div
+  class="row d-flex flex-align-center flex-justify-center animated zoomIn faster"
+  style="height: 100%"
+>
+  <div>
+    <h1>Inicio</h1>
+    <div class="tiles-grid tiles-group size-3">
+      <div
+        *ngFor="let section of sections"
+        (click)="redirectTo(section.link)"
+        data-role="tile"
+        [attr.data-size]="section.size"
+        data-effect="hover-slide-down"
+        [className]="section.color"
+      >
+        <div class="slide-front">
+          <div class="icon"><span [className]="section.icon"></span></div>
+          <span class="branding-bar">{{ section.title }}</span>
+        </div>
+        <div class="slide-back bg-dark">
+          <div class="icon"><span [className]="section.icon"></span></div>
+          <span class="branding-bar">{{ section.title }}</span>
+        </div>
+      </div>
+      <div
+        (click)="logout()"
+        data-role="tile"
+        data-size="medium"
+        data-effect="hover-slide-down"
+        class="bg-red"
+      >
+        <div class="slide-front">
+          <span class="mif-exit icon"></span>
+          <span class="branding-bar">Cerrar sesión</span>
+        </div>
+        <div class="slide-back bg-dark">
+          <span class="mif-enter icon"></span>
+          <span class="branding-bar">Cerrar sesión</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

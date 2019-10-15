@@ -1,0 +1,41 @@
+<div class="row d-flex flex-align-center">
+  <div class="col-8">
+    <form>
+      <input
+        #search
+        (keyup)="setSearchKeyword(search.value)"
+        type="text"
+        data-role="input"
+        data-prepend="Buscar: "
+        data-clear-button="false"
+      />
+    </form>
+  </div>
+  <div class="col-2">
+    <div class="row d-flex flex-justify-center">
+      <ul class="h-menu flex-justify-end">
+        <li>
+          <a href="#" class="dropdown-toggle"
+            >{{ _pagination.pagination.rowsPerPage }} filas</a
+          >
+          <ul class="d-menu" data-role="dropdown">
+            <li *ngFor="let row of _pagination.rowsConfig">
+              <a (click)="setRowsPerPage(row)">{{ row }} filas</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-2">
+    <div class="row d-flex flex-justify-end">
+      <button
+        [routerLink]="[table, 'new']"
+        type="button"
+        class="button primary"
+      >
+        Nuevo registro
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,134 @@
+<div class="p-7 animated fadeInUp faster">
+  <h1>{{ id === 'new' ? 'Agregar' : 'Editar' }} salida</h1>
+  <form
+    *ngIf="form"
+    ngNativeValidate
+    data-role="validator"
+    [formGroup]="form"
+    (ngSubmit)="chooseType()"
+    class="animated fadeIn faster"
+  >
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label>Estado</label>
+          <select
+            formControlName="state"
+            data-role="select"
+            data-filter="false"
+            data-prepend="<span class='mif-beenhere'></span>"
+            data-validate="minlength=1"
+          >
+            <option value="false">Pendiente</option>
+            <option value="true">Finalizada</option>
+          </select>
+          <span class="invalid_feedback">
+            La cantidad no es válida.
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Operador (nómina)</label>
+          <input
+            formControlName="operator"
+            type="text"
+            placeholder="Ingrese el número de nómina"
+            data-role="input"
+            data-prepend="<span class='mif-users'></span>"
+            data-validate="minlength=3"
+          />
+          <span class="invalid_feedback">
+            La nómina del operador no es válida.
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Producto (código de barras)</label>
+          <input
+            (keyup)="getProduct()"
+            formControlName="barcode"
+            type="number"
+            placeholder="Escanee o escriba el código de barras"
+            data-role="input"
+            data-prepend="<span class='mif-equalizer2'></span>"
+            data-validate="minlength=8"
+          />
+          <span class="invalid_feedback">
+            El código de barras no es válido.
+          </span>
+        </div>
+        <div class="form-group">
+          <label
+            >Cantidad
+            {{ product ? '(máximo ' + product.stock + ' piezas)' : '' }}</label
+          >
+          <input
+            formControlName="quantity"
+            type="number"
+            placeholder="Ingrese la cantidad"
+            data-role="input"
+            data-prepend="<span class='mif-layers'></span>"
+            data-validate="min=1"
+          />
+          <span class="invalid_feedback">
+            La cantidad no es válida.
+          </span>
+        </div>
+        <div class="form-group">
+          <small>Todos los datos son obligatorios.</small>
+        </div>
+        <div class="form-group">
+          <button
+            *ngIf="id === 'new'"
+            type="submit"
+            class="button success mx-1"
+            [disabled]="form.invalid"
+          >
+            Guardar
+          </button>
+          <button
+            *ngIf="id !== 'new'"
+            type="submit"
+            class="button success mx-1"
+            [disabled]="form.invalid"
+          >
+            Editar
+          </button>
+          <button routerLink="/outputs" type="button" class="button mx-1">
+            Cancelar
+          </button>
+        </div>
+      </div>
+      <div *ngIf="product" class="col-6 animated fadeIn faster">
+        <p>Información del producto</p>
+        <div class="bg-grayWhite py-2 px-3">
+          <div class="form-group">
+            <input
+              type="text"
+              [placeholder]="product.name"
+              data-role="input"
+              data-prepend="<span class='mif-shopping-basket'></span> Nombre"
+              disabled
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              [placeholder]="product.price"
+              data-role="input"
+              data-prepend="<span class='mif-dollar2'></span> Precio"
+              disabled
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              [placeholder]="product.stock"
+              data-role="input"
+              data-prepend="<span class='mif-layers'></span> Stock"
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,127 @@
+<div class="p-7 animated fadeInUp faster">
+  <h1>{{ id === 'new' ? 'Agregar' : 'Editar' }} entrada</h1>
+  <form
+    *ngIf="form"
+    ngNativeValidate
+    data-role="validator"
+    [formGroup]="form"
+    (ngSubmit)="chooseType()"
+    class="animated fadeIn faster"
+  >
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label>Total</label>
+          <input
+            formControlName="total"
+            type="number"
+            [placeholder]="form.controls['total'].value"
+            data-role="input"
+            data-prepend="<span class='mif-dollar2'></span>"
+          />
+        </div>
+        <div class="form-group">
+          <label>Estado</label>
+          <select
+            formControlName="state"
+            data-role="select"
+            data-filter="false"
+            data-prepend="<span class='mif-beenhere'></span>"
+            data-validate="minlength=1"
+          >
+            <option value="false">Pendiente</option>
+            <option value="true">Pagada</option>
+          </select>
+          <span class="invalid_feedback">
+            El estado de la factura no es válido.
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Usuario</label>
+          <input
+            type="text"
+            [placeholder]="user.username"
+            data-role="input"
+            data-prepend="<span class='mif-user'></span>"
+            disabled
+          />
+        </div>
+        <div class="form-group">
+          <small>Todos los datos son obligatorios.</small>
+        </div>
+        <div class="form-group">
+          <button
+            *ngIf="id === 'new'"
+            type="submit"
+            class="button success mx-1"
+            [disabled]="form.invalid"
+          >
+            Guardar
+          </button>
+          <button
+            *ngIf="id !== 'new'"
+            type="submit"
+            class="button success mx-1"
+            [disabled]="form.invalid"
+          >
+            Editar
+          </button>
+          <button routerLink="/inputs" type="button" class="button mx-1">
+            Cancelar
+          </button>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label>Producto (código de barras)</label>
+          <input
+            (keyup)="getProduct()"
+            formControlName="barcode"
+            type="number"
+            placeholder="Escanee o escriba el código de barras"
+            data-role="input"
+            data-prepend="<span class='mif-equalizer2'></span>"
+            data-validate="minlength=8"
+          />
+          <span class="invalid_feedback">
+            El código de barras no es válido.
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Cantidad</label>
+          <input
+            (keyup)="calculateTotal()"
+            formControlName="quantity"
+            type="number"
+            placeholder="Ingrese la cantidad"
+            data-role="input"
+            data-prepend="<span class='mif-layers'></span>"
+            data-validate="min=1"
+          />
+          <span class="invalid_feedback">
+            La cantidad no es válida.
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Precio</label>
+          <input
+            *ngIf="input"
+            type="number"
+            [placeholder]="form.controls['price'].value"
+            data-role="input"
+            data-prepend="<span class='mif-layers'></span>"
+            disabled
+          />
+          <input
+            *ngIf="!input"
+            formControlName="price"
+            type="number"
+            placeholder="Precio del producto"
+            data-role="input"
+            data-prepend="<span class='mif-layers'></span>"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

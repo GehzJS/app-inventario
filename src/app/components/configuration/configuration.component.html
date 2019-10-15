@@ -1,0 +1,108 @@
+<div
+  class="row d-flex flex-align-center flex-justify-center animated zoomIn faster"
+  style="height: 100%"
+>
+  <div>
+    <h1>Configuración</h1>
+    <div *ngIf="!valid" class="animated fadeIn faster">
+      <div class="form-group">
+        <label>Clave secreta</label>
+        <input
+          #password
+          (keyup)="setKey(password.value)"
+          type="password"
+          placeholder="Ingrese la clave secreta"
+          data-role="input"
+          data-prepend="<span class='mif-key'></span>"
+        />
+      </div>
+      <div class="form-group">
+        <button (click)="isValid()" type="button" class="button success mx-1">
+          Entrar
+        </button>
+        <button (click)="hideConfig()" type="button" class="button mx-1">
+          Cancelar
+        </button>
+      </div>
+    </div>
+    <div *ngIf="valid" class="animated fadeIn faster">
+      <div class="form-group">
+        <div class="row">
+          <label>Ruta de la API</label>
+          <div class="col-11">
+            <input
+              #url
+              (keyup)="setApiUrl(url.value)"
+              type="text"
+              placeholder="Ruta de la API (www.my-api.com)"
+              data-role="input"
+              [value]="apiURL"
+            />
+          </div>
+          <div class="col-1">
+            <button (click)="saveApiUrl()" type="button" class="button success">
+              <span class="mif-floppy-disk"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label>ID del cliente</label>
+          <div class="col-11">
+            <input
+              #id
+              (keyup)="setClientId(id.value)"
+              type="number"
+              placeholder="ID del cliente"
+              data-role="input"
+              [value]="clientId"
+            />
+          </div>
+          <div class="col-1">
+            <button
+              (click)="saveClientId()"
+              type="button"
+              class="button success"
+            >
+              <span class="mif-floppy-disk"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label>Contraseña del cliente</label>
+          <div class="col-11">
+            <input
+              #secret
+              (keyup)="setClientSecret(secret.value)"
+              type="text"
+              placeholder="Contraseña del cliente"
+              data-role="input"
+              [value]="clientSecret"
+            />
+          </div>
+          <div class="col-1">
+            <button
+              (click)="saveClientSecret()"
+              type="button"
+              class="button success"
+            >
+              <span class="mif-floppy-disk"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button
+          (click)="hideConfigWithReload()"
+          type="button"
+          class="button alert"
+        >
+          Salir de la configuración
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

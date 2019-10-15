@@ -1,0 +1,46 @@
+<div class="p-7 animated fadeInDown faster">
+  <h1>Usuarios</h1>
+  <app-search
+    [table]="'/users'"
+    [loadData]="loadUsers"
+    [searchData]="searchUsers"
+  ></app-search>
+  <app-table [titles]="tableTitles">
+    <tr *ngFor="let user of users" class="animated fadeInDown faster">
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+        <button
+          class="button small"
+          style="cursor: default"
+          [ngClass]="{
+            success: user.role === 'ROLE_ADMIN',
+            alert: user.role === 'ROLE_USER'
+          }"
+        >
+          {{ user.role === 'ROLE_ADMIN' ? 'Administrador' : 'Usuario' }}
+        </button>
+      </td>
+      <td>
+        <button
+          [routerLink]="['/users', user.id]"
+          type="button"
+          class="button success mx-1"
+          [disabled]="!_auth.getUserRole()"
+        >
+          <span class="mif-pencil icon"></span>
+        </button>
+        <button
+          (click)="openModal(user.id)"
+          type="button"
+          class="button alert mx-1"
+          [disabled]="!_auth.getUserRole()"
+        >
+          <span class="mif-bin icon"></span>
+        </button>
+      </td>
+    </tr>
+  </app-table>
+
+  <app-pagination [loadData]="loadUsers"></app-pagination>
+</div>

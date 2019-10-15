@@ -1,0 +1,52 @@
+<div class="p-7 animated fadeInDown faster">
+  <h1>Salidas</h1>
+  <app-search
+    [table]="'/outputs'"
+    [loadData]="loadOutputs"
+    [searchData]="searchOutputs"
+  ></app-search>
+  <app-table [titles]="tableTitles">
+    <tr *ngFor="let output of outputs" class="animated fadeInDown faster">
+      <td>{{ '00000' + output.id | slice: -5 }}</td>
+      <td>
+        <button
+          class="button small"
+          style="cursor: default"
+          [ngClass]="{ success: output.state, alert: !output.state }"
+        >
+          {{ output.state ? 'Finalizada' : 'Pendiente' }}
+        </button>
+      </td>
+      <td>{{ output.operator }}</td>
+      <td>{{ output.product.name }}</td>
+      <td>{{ output.quantity }}</td>
+      <td>
+        <button
+          [routerLink]="['/outputs', output.id]"
+          type="button"
+          class="button success mx-1"
+          [disabled]="output.state"
+        >
+          <span class="mif-pencil icon"></span>
+        </button>
+        <button
+          (click)="openModal(output.id)"
+          type="button"
+          class="button alert mx-1"
+          [disabled]="!_auth.getUserRole()"
+        >
+          <span class="mif-bin icon"></span>
+        </button>
+        <button
+          [routerLink]="['/outputs/print', output.id]"
+          type="button"
+          class="button warning mx-1"
+        >
+          <span class="mif-print icon"></span>
+        </button>
+      </td>
+    </tr>
+  </app-table>
+
+  <app-pagination [loadData]="loadOutputs"></app-pagination>
+</div>

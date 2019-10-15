@@ -1,0 +1,79 @@
+<div class="p-7 animated fadeInUp faster">
+  <h1>{{ id === 'new' ? 'Agregar' : 'Editar' }} proveedor</h1>
+  <form
+    *ngIf="form"
+    ngNativeValidate
+    data-role="validator"
+    [formGroup]="form"
+    (ngSubmit)="chooseType()"
+    class="animated fadeIn faster"
+  >
+    <div class="form-group">
+      <label>Nombre</label>
+      <input
+        formControlName="name"
+        type="text"
+        placeholder="Ingrese el nombre"
+        data-role="input"
+        data-prepend="<span class='mif-user'></span>"
+        data-validate="minlength=3"
+      />
+      <span class="invalid_feedback">
+        El nombre no es válido.
+      </span>
+    </div>
+    <div class="form-group">
+      <label>Correo electrónico</label>
+      <input
+        formControlName="email"
+        type="email"
+        placeholder="Ingrese el correo electrónico"
+        data-role="input"
+        data-prepend="<span class='mif-mail'></span>"
+        data-validate="minlength=3 email"
+      />
+      <span class="invalid_feedback">
+        El correo no es válido.
+      </span>
+    </div>
+    <div class="form-group">
+      <label>Teléfono</label>
+      <input
+        formControlName="phone"
+        type="text"
+        placeholder="Ingrese el teléfono"
+        data-role="input"
+        data-prepend="<span class='mif-phone'></span>"
+        data-validate="minlength=10"
+        mask="(000) 000-0000"
+      />
+      <span class="invalid_feedback">
+        El teléfono no es válido.
+      </span>
+    </div>
+    <div class="form-group">
+      <small>Todos los datos son obligatorios.</small>
+    </div>
+    <div class="form-group">
+      <button
+        *ngIf="id === 'new'"
+        type="submit"
+        class="button success mx-1"
+        [disabled]="form.invalid"
+      >
+        Guardar
+      </button>
+      <button
+        *ngIf="id !== 'new'"
+        type="submit"
+        class="button success mx-1"
+        [disabled]="form.invalid"
+      >
+        Editar
+      </button>
+      <button routerLink="/providers" type="button" class="button mx-1">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

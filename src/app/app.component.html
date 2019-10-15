@@ -1,0 +1,15 @@
+<div class="grid">
+  <div class="row" style="height: 100vh; width: 100vw; overflow: hidden;">
+    <app-sidebar
+      class="h-auto"
+      [visibility]="_pagination.sidebarVisibility"
+    ></app-sidebar>
+    <div class="cell" style="overflow: hidden">
+      <router-outlet *ngIf="_pagination.routerVisibility"></router-outlet>
+      <app-configuration
+        *ngIf="!_pagination.routerVisibility"
+        (document:keydown.control.alt.c)="showConfig()"
+      ></app-configuration>
+    </div>
+  </div>
+</div>

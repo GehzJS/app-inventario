@@ -1,0 +1,53 @@
+<div class="p-7 animated fadeInDown faster">
+  <h1>Entradas</h1>
+  <app-search
+    [table]="'/inputs'"
+    [loadData]="loadInputs"
+    [searchData]="searchInputs"
+  ></app-search>
+  <app-table [titles]="tableTitles">
+    <tr *ngFor="let input of inputs" class="animated fadeInDown faster">
+      <td>{{ '00000' + input.id | slice: -5 }}</td>
+      <td>{{ input.total | currency }}</td>
+      <td>
+        <button
+          class="button small"
+          style="cursor: default"
+          [ngClass]="{ success: input.state, alert: !input.state }"
+        >
+          {{ input.state ? 'Pagada' : 'Pendiente' }}
+        </button>
+      </td>
+      <td>{{ input.product.name }}</td>
+      <td>{{ input.quantity }}</td>
+      <td>{{ input.user.username }}</td>
+      <td>
+        <button
+          [routerLink]="['/inputs', input.id]"
+          type="button"
+          class="button success mx-1"
+          [disabled]="input.state"
+        >
+          <span class="mif-pencil icon"></span>
+        </button>
+        <button
+          (click)="openModal(input.id)"
+          type="button"
+          class="button alert mx-1"
+          [disabled]="!_auth.getUserRole()"
+        >
+          <span class="mif-bin icon"></span>
+        </button>
+        <button
+          [routerLink]="['/inputs/print', input.id]"
+          type="button"
+          class="button warning mx-1"
+        >
+          <span class="mif-print icon"></span>
+        </button>
+      </td>
+    </tr>
+  </app-table>
+
+  <app-pagination [loadData]="loadInputs"></app-pagination>
+</div>

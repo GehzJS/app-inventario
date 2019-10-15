@@ -1,0 +1,34 @@
+<div class="p-7 animated fadeInDown faster">
+  <h1>Proveedores</h1>
+  <app-search
+    [table]="'/providers'"
+    [loadData]="loadProviders"
+    [searchData]="searchProviders"
+  ></app-search>
+  <app-table [titles]="tableTitles">
+    <tr *ngFor="let provider of providers" class="animated fadeInDown faster">
+      <td>{{ provider.name }}</td>
+      <td>{{ provider.email }}</td>
+      <td>{{ provider.phone | mask: '(000) 000-0000' }}</td>
+      <td>
+        <button
+          [routerLink]="['/providers', provider.id]"
+          type="button"
+          class="button success mx-1"
+        >
+          <span class="mif-pencil icon"></span>
+        </button>
+        <button
+          (click)="openModal(provider.id)"
+          type="button"
+          class="button alert mx-1"
+          [disabled]="!_auth.getUserRole()"
+        >
+          <span class="mif-bin icon"></span>
+        </button>
+      </td>
+    </tr>
+  </app-table>
+
+  <app-pagination [loadData]="loadProviders"></app-pagination>
+</div>

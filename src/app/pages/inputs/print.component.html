@@ -1,0 +1,62 @@
+<div
+  class="row d-flex flex-align-center flex-justify-center animated zoomIn faster"
+  style="height: 100%"
+>
+  <div>
+    <h1 class="mb-5">Imprimir ticket</h1>
+    <hr style="background-color: black;" />
+    <div id="print" class="mx-8">
+      <div *ngIf="input" class="row animated fadeIn faster">
+        <div class="col-8">
+          <h3>Ticket de entrada</h3>
+        </div>
+        <div class="col-4">
+          <p><strong>Folio: </strong>{{ '00000' + input.id | slice: -5 }}</p>
+          <p><strong>Responsable: </strong>{{ input.user.email }}</p>
+        </div>
+        <div class="col-12">
+          <table class="table row-border cell-border">
+            <thead class="bg-gray">
+              <tr>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Producto</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ input.quantity }} piezas</td>
+                <td>{{ input.total | currency }}</td>
+                <td>{{ input.product.name }}</td>
+                <td>{{ input.state ? 'Finalizada' : 'Pendiente' }}</td>
+                <td>{{ now | date: 'd/M/yyyy' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-12 mt-8 py-8 d-flex flex-justify-center">
+          <p
+            style="width: 30%; text-align: center; border-top: 1px solid black;"
+          >
+            Firma de recibido
+          </p>
+        </div>
+      </div>
+    </div>
+    <hr style="background-color: black;" />
+    <button
+      printSectionId="print"
+      [useExistingCss]="true"
+      ngxPrint
+      type="button"
+      class="button success mx-1"
+    >
+      Imprimir
+    </button>
+    <button (click)="leave()" type="button" class="button mx-1">
+      Salir
+    </button>
+  </div>
+</div>

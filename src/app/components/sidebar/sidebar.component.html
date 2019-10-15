@@ -1,0 +1,29 @@
+<ul
+  *ngIf="visibility"
+  class="sidenav-simple animated fadeInLeft faster"
+  [ngClass]="{ 'sidenav-simple-expand-fs': expanded }"
+>
+  <li>
+    <a (click)="expanded = !expanded">
+      <span class="mif-menu icon"></span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/home">
+      <span class="mif-home icon"></span>
+      <span class="title">Inicio</span>
+    </a>
+  </li>
+  <li *ngFor="let section of sections" routerLinkActive="active">
+    <a [routerLink]="[section.link]">
+      <div class="icon"><span [className]="[section.icon]"></span></div>
+      <span class="title">{{ section.title }}</span>
+    </a>
+  </li>
+  <li (click)="logout()" style="cursor: pointer;">
+    <a>
+      <span class="mif-exit icon"></span>
+      <span class="title">Cerrar sesión</span>
+    </a>
+  </li>
+</ul>

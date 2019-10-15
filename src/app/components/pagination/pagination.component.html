@@ -1,0 +1,56 @@
+<div class="row d-flex flex-row-r">
+  <small
+    >Mostrando los registros del
+    {{
+      _pagination.pagination.rowsPerPage *
+        (_pagination.pagination.currentPage - 1) +
+        1
+    }}
+    al
+    {{
+      _pagination.pagination.rowsPerPage * _pagination.pagination.currentPage <
+      _pagination.pagination.totalEntries
+        ? _pagination.pagination.rowsPerPage *
+          _pagination.pagination.currentPage
+        : _pagination.pagination.totalEntries
+    }}
+    de {{ _pagination.pagination.totalEntries }} totales.</small
+  >
+</div>
+<div class="row d-flex flex-row-r">
+  <ul class="pagination">
+    <li
+      *ngIf="_pagination.pagination.currentPage !== 1"
+      class="page-item service"
+    >
+      <a
+        (click)="changePage(_pagination.pagination.currentPage - 1)"
+        class="page-link"
+      >
+        <span class="mif-chevron-left"></span> Anterior
+      </a>
+    </li>
+    <div *ngFor="let page of _pagination.numberOfPages; let index = index">
+      <li
+        (click)="changePage(index + 1)"
+        [ngClass]="{ active: _pagination.pagination.currentPage === index + 1 }"
+        class="page-item"
+      >
+        <a class="page-link">{{ index + 1 }}</a>
+      </li>
+    </div>
+    <li
+      *ngIf="
+        _pagination.pagination.currentPage !== _pagination.pagination.lastPage
+      "
+      class="page-item service"
+    >
+      <a
+        (click)="changePage(_pagination.pagination.currentPage + 1)"
+        class="page-link"
+      >
+        Siguiente <span class="mif-chevron-right"></span>
+      </a>
+    </li>
+  </ul>
+</div>

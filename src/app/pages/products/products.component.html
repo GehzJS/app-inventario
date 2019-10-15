@@ -1,0 +1,35 @@
+<div class="p-7 animated fadeInDown faster">
+  <h1>Productos</h1>
+  <app-search
+    [table]="'/products'"
+    [loadData]="loadProducts"
+    [searchData]="searchProducts"
+  ></app-search>
+  <app-table [titles]="tableTitles">
+    <tr *ngFor="let product of products" class="animated fadeInDown faster">
+      <td>{{ product.name }}</td>
+      <td>{{ product.price | currency }}</td>
+      <td>{{ product.stock }}</td>
+      <td>{{ product.provider.name }}</td>
+      <td>
+        <button
+          [routerLink]="['/products', product.id]"
+          type="button"
+          class="button success mx-1"
+        >
+          <span class="mif-pencil icon"></span>
+        </button>
+        <button
+          (click)="openModal(product.id)"
+          type="button"
+          class="button alert mx-1"
+          [disabled]="!_auth.getUserRole()"
+        >
+          <span class="mif-bin icon"></span>
+        </button>
+      </td>
+    </tr>
+  </app-table>
+
+  <app-pagination [loadData]="searchProducts"></app-pagination>
+</div>

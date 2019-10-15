@@ -1,0 +1,17 @@
+<div class="row table-container">
+  <table class="table stripped row-hover">
+    <thead *ngIf="titles">
+      <tr>
+        <th *ngFor="let title of titles" class="table-header">
+          {{ title }}
+        </th>
+        <th class="table-header">
+          Acciones
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-content></ng-content>
+    </tbody>
+  </table>
+</div>

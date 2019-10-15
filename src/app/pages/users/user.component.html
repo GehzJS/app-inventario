@@ -1,0 +1,118 @@
+<div class="p-7 animated fadeInUp faster">
+  <h1>{{ id === 'new' ? 'Agregar' : 'Editar' }} usuario</h1>
+  <form
+    *ngIf="form"
+    ngNativeValidate
+    data-role="validator"
+    [formGroup]="form"
+    (ngSubmit)="chooseType()"
+    class="animated fadeIn faster"
+  >
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label>Usuario</label>
+          <input
+            formControlName="username"
+            type="text"
+            placeholder="Ingrese el usuario"
+            data-role="input"
+            data-prepend="<span class='mif-user'></span>"
+            data-validate="minlength=3"
+          />
+          <span class="invalid_feedback">
+            El nombre de usuario no es válido.
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input
+            formControlName="email"
+            type="email"
+            placeholder="Ingrese el correo electrónico"
+            data-role="input"
+            data-prepend="<span class='mif-mail'></span>"
+            data-validate="minlength=10 email"
+          />
+          <span class="invalid_feedback">
+            El correo electrónico no es válido.
+          </span>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input
+            formControlName="password"
+            type="password"
+            placeholder="Ingrese la contraseña"
+            data-role="input"
+            data-prepend="<span class='mif-key'></span>"
+            data-validate="minlength=8"
+            name="password1"
+          />
+          <span class="invalid_feedback">
+            La contraseña debe tener al menos 8 caracteres.
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Confirmar contraseña</label>
+          <input
+            formControlName="verify"
+            type="password"
+            placeholder="Confirme la contraseña"
+            data-role="input"
+            data-prepend="<span class='mif-key'></span>"
+            data-validate="minlength=8 compare=password1"
+            name="password2"
+          />
+          <span class="invalid_feedback">
+            Las contraseñas no coinciden.
+          </span>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label>Rol en el sistema</label>
+          <select
+            formControlName="role"
+            data-role="select"
+            data-filter="false"
+            data-prepend="<span class='mif-verified'></span>"
+            data-validate="minlength=5"
+          >
+            <option value="ROLE_USER">Usuario</option>
+            <option value="ROLE_ADMIN">Administrador</option>
+          </select>
+          <span class="invalid_feedback">
+            El usuario debe tener un rol válido.
+          </span>
+        </div>
+        <div class="form-group">
+          <small>Todos los datos son obligatorios.</small>
+        </div>
+        <div class="form-group">
+          <button
+            *ngIf="id === 'new'"
+            type="submit"
+            class="button success mx-1"
+            [disabled]="form.invalid"
+          >
+            Guardar
+          </button>
+          <button
+            *ngIf="id !== 'new'"
+            type="submit"
+            class="button success mx-1"
+            [disabled]="form.invalid"
+          >
+            Editar
+          </button>
+          <button routerLink="/users" type="button" class="button mx-1">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
